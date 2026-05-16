@@ -1,10 +1,10 @@
 site:
   id: tractor-center
-  base_url: "https://example.com/"
+  base_url: "https://cookiespooky.github.io/tractor-center/"
   title: "Трактор Центр"
   description: "Ремонт турбин, двигателей, ТНВД и форсунок"
   default_og_image: ""
-  media_base_url: "https://example.com/media/"
+  media_base_url: "https://cookiespooky.github.io/tractor-center/media/"
   host: 127.0.0.1
 
 settings:
@@ -12,7 +12,7 @@ settings:
   partner_logo: "/media/site/turbocom-invest-logo.png"
 
 runtime:
-  mode: "dev"
+  mode: "prod"
   dev:
     base_url: "http://127.0.0.1:8080/"
     media_base_url: "http://127.0.0.1:8080/media/"

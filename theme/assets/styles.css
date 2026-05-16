@@ -38,6 +38,7 @@ h1 { margin: 0; font-size: clamp(40px, 5.4vw, 72px); line-height: .98; max-width
 .btn-outline { background: transparent; color: var(--ink); border-color: #bcb4a6; }
 
 .services, .benefits, .partners, .contacts { padding: 56px 0; }
+.services-title { margin-bottom: 0; }
 .service-section { padding: 0 0 1.5em; }
 .service-divider { border: 0; border-top: 1px solid #d9d2c6; width: min(1140px, 92vw); margin: 0 auto 1.5em; }
 h2 { margin: 0 0 1.5em; font-size: clamp(30px, 3.1vw, 44px); line-height: 1.1; }

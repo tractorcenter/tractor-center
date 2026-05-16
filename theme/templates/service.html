@@ -1,0 +1,124 @@
+{{- $slug := .Page.Slug -}}
+
+<section class="hero service-hero">
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-grid service-hero-grid">
+    <div>
+      <p class="kicker">Услуги Трактор Центр</p>
+      <h1>{{ .Page.Title }}</h1>
+      <p class="lead">{{ .Page.Description }}</p>
+      <div class="hero-cta">
+        <a class="btn btn-accent" href="tel:+79226804433">Оставить заявку</a>
+        <a class="btn btn-light" href="{{ .BaseURL }}/#contacts">Связаться с нами</a>
+      </div>
+    </div>
+    <div class="service-hero-media">
+      {{- if eq $slug "remont-traktorov" }}
+      <img src="/media/site/tractors-1.jpg" alt="Ремонт тракторов" />
+      {{- else if eq $slug "remont-dvigateley" }}
+      <img src="/media/site/engines-3.jpg" alt="Ремонт двигателей" />
+      {{- else if eq $slug "remont-tnvd-i-forsunok" }}
+      <img src="/media/site/fuel-2.jpg" alt="Ремонт ТНВД и форсунок" />
+      {{- else }}
+      <img src="/media/site/turbo-3.jpg" alt="Ремонт и продажа турбокомпрессоров" />
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+<section class="service-seo">
+  <div class="wrap">
+    <h2>Профессиональный ремонт с гарантией</h2>
+    <p>
+      Сервисный центр «Трактор Центр» выполняет ремонт агрегатов в заводских условиях с соблюдением технологических регламентов.
+      Мы работаем с отечественной и импортной техникой, используем проверенные комплектующие и предоставляем гарантию на выполненные работы.
+      Для каждого заказа подбираем оптимальный формат обслуживания по срокам и бюджету.
+    </p>
+  </div>
+</section>
+
+<section class="service-gallery">
+  <div class="wrap">
+    <h2>Галерея работ</h2>
+    <div class="gallery-marquee">
+      <div class="gallery-track">
+        {{- if eq $slug "remont-traktorov" }}
+        <img src="/media/site/tractors-1.jpg" alt="Ремонт тракторов" />
+        <img src="/media/site/tractors-2.jpg" alt="Ремонт тракторов" />
+        <img src="/media/site/tractors-3.jpg" alt="Ремонт тракторов" />
+        {{- else if eq $slug "remont-dvigateley" }}
+        <img src="/media/site/engines-1.jpg" alt="Ремонт двигателей" />
+        <img src="/media/site/engines-2.jpg" alt="Ремонт двигателей" />
+        <img src="/media/site/engines-3.jpg" alt="Ремонт двигателей" />
+        {{- else if eq $slug "remont-tnvd-i-forsunok" }}
+        <img src="/media/site/fuel-1.jpg" alt="Ремонт ТНВД и форсунок" />
+        <img src="/media/site/fuel-2.jpg" alt="Ремонт ТНВД и форсунок" />
+        <img src="/media/site/fuel-3.jpg" alt="Ремонт ТНВД и форсунок" />
+        {{- else }}
+        <img src="/media/site/turbo-1.jpg" alt="Турбокомпрессоры" />
+        <img src="/media/site/turbo-2.jpg" alt="Турбокомпрессоры" />
+        <img src="/media/site/turbo-3.jpg" alt="Турбокомпрессоры" />
+        {{- end }}
+        {{- if eq $slug "remont-traktorov" }}
+        <img src="/media/site/tractors-1.jpg" alt="Ремонт тракторов" />
+        <img src="/media/site/tractors-2.jpg" alt="Ремонт тракторов" />
+        <img src="/media/site/tractors-3.jpg" alt="Ремонт тракторов" />
+        {{- else if eq $slug "remont-dvigateley" }}
+        <img src="/media/site/engines-1.jpg" alt="Ремонт двигателей" />
+        <img src="/media/site/engines-2.jpg" alt="Ремонт двигателей" />
+        <img src="/media/site/engines-3.jpg" alt="Ремонт двигателей" />
+        {{- else if eq $slug "remont-tnvd-i-forsunok" }}
+        <img src="/media/site/fuel-1.jpg" alt="Ремонт ТНВД и форсунок" />
+        <img src="/media/site/fuel-2.jpg" alt="Ремонт ТНВД и форсунок" />
+        <img src="/media/site/fuel-3.jpg" alt="Ремонт ТНВД и форсунок" />
+        {{- else }}
+        <img src="/media/site/turbo-1.jpg" alt="Турбокомпрессоры" />
+        <img src="/media/site/turbo-2.jpg" alt="Турбокомпрессоры" />
+        <img src="/media/site/turbo-3.jpg" alt="Турбокомпрессоры" />
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="benefits">
+  <div class="wrap">
+    <h2>Преимущества работы с компанией</h2>
+    <div class="benefit-grid">
+      <div class="benefit">Сертифицированный ремонт в заводских условиях</div>
+      <div class="benefit">Срок ремонта 2-3 дня без учета логистики</div>
+      <div class="benefit">Гарантия 6 месяцев без ограничения пробега</div>
+      <div class="benefit">Подбор, консультации и техническое сопровождение</div>
+    </div>
+  </div>
+</section>
+
+{{- if eq $slug "remont-i-prodazha-turbokompressorov" }}
+<section class="partners" id="partners">
+  <div class="wrap partner-box partner-row">
+    <div class="partner-copy">
+      <h2>Партнеры</h2>
+      <p>Компания является дилером по турбокомпрессорам завода «Турбоком-Инвест».</p>
+      <a class="btn btn-accent" href="https://xn----9sbemnkokebswbmc.xn--p1ai/?ysclid=mp7150uq3s662872173" target="_blank" rel="noopener">Перейти на сайт завода</a>
+    </div>
+    <a class="partner-logo-link" href="https://xn----9sbemnkokebswbmc.xn--p1ai/?ysclid=mp7150uq3s662872173" target="_blank" rel="noopener">
+      <img class="partner-logo" src="/media/site/turbocom-invest-logo.png" alt="Логотип Турбоком-Инвест" />
+    </a>
+  </div>
+</section>
+{{- end }}
+
+<section class="contacts" id="contacts">
+  <div class="wrap contacts-grid">
+    <div class="contacts-copy">
+      <h2>Контакты</h2>
+      <p>г. Ижевск, ул. Новосмирновская, 1</p>
+      <p><a href="tel:+79226804433">+7 (922) 680-44-33</a></p>
+      <p><a href="mailto:tractorcentr@yandex.ru">tractorcentr@yandex.ru</a></p>
+      <p><a class="btn btn-accent" href="tel:+79226804433">Оставить заявку</a></p>
+    </div>
+    <div class="map-card">
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=53.382961%2C56.911416&mode=whatshere&whatshere%5Bpoint%5D=53.382961%2C56.911416&whatshere%5Bzoom%5D=17&z=17" allowfullscreen title="Карта Трактор Центр"></iframe>
+    </div>
+  </div>
+</section>

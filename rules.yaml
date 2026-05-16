@@ -1,0 +1,66 @@
+version: 1
+
+fields:
+  required: ["type", "slug", "title"]
+  optional:
+    - description
+    - draft
+    - order
+  defaults:
+    draft: false
+
+types:
+  home:
+    template: "home.html"
+    permalink: "/"
+    include_in:
+      sitemap: true
+      search: false
+  page:
+    template: "page.html"
+    permalink: "/{{ slug }}/"
+    include_in:
+      sitemap: true
+      search: true
+  service:
+    template: "service.html"
+    permalink: "/uslugi/{{ slug }}/"
+    include_in:
+      sitemap: true
+      search: true
+
+collections:
+  services:
+    kind: "filter"
+    materialize: false
+    where:
+      all:
+        - fm_eq: { key: "draft", value: false }
+        - type_in: ["service"]
+    sort:
+      by: "fm.order"
+      dir: "asc"
+      nulls_last: true
+    limit: 50
+
+sitemap:
+  include_types: ["home", "page", "service"]
+  exclude_drafts: true
+
+search:
+  include_types: ["page", "service"]
+  exclude_drafts: true
+
+validation:
+  single_page_of_type:
+    home: 1
+  duplicate_route:
+    action: "error"
+  unknown_type:
+    action: "error"
+  unique_slug:
+    action: "error"
+  permalink_requires_slug:
+    action: "error"
+  missing_template:
+    action: "error"

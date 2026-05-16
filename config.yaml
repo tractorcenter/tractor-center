@@ -1,0 +1,42 @@
+site:
+  id: tractor-center
+  base_url: "https://example.com/"
+  title: "Трактор Центр"
+  description: "Ремонт турбин, двигателей, ТНВД и форсунок"
+  default_og_image: ""
+  media_base_url: "https://example.com/media/"
+  host: 127.0.0.1
+
+settings:
+  hero_background: "/media/site/hero-bg.jpg"
+  partner_logo: "/media/site/turbocom-invest-logo.png"
+
+runtime:
+  mode: "dev"
+  dev:
+    base_url: "http://127.0.0.1:8080/"
+    media_base_url: "http://127.0.0.1:8080/media/"
+
+content:
+  source: "local"
+  local_dir: "./content"
+
+markdown:
+  html_policy: "safe"
+
+paths:
+  file_root: ./.notepub
+  artifacts_dir: ./.notepub/artifacts
+  snapshot_file: ./.notepub/snapshot/objects.json
+  cache_root: ./.notepub/cache
+
+theme:
+  dir: .
+  name: "theme"
+  templates_subdir: templates
+  assets_subdir: assets
+
+server:
+  listen: "127.0.0.1:8080"
+
+rules_path: ./rules.yaml

@@ -88,7 +88,7 @@
     if (!titles.length) return;
     titles.forEach(function (el) {
       var max = 72;
-      var min = 22;
+      var min = 32;
       var size = max;
       el.style.fontSize = size + 'px';
       el.style.overflowWrap = 'normal';

@@ -21,5 +21,6 @@ if [[ ! -x "$BIN" ]]; then
 fi
 
 "$BIN" validate --config ./config.yaml --rules ./rules.yaml
+rm -rf ./.notepub
 "$BIN" index --config ./config.yaml --rules ./rules.yaml
 "$BIN" build --config ./config.yaml --rules ./rules.yaml --dist ./dist

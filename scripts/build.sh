@@ -24,3 +24,5 @@ fi
 rm -rf ./.notepub
 "$BIN" index --config ./config.yaml --rules ./rules.yaml
 "$BIN" build --config ./config.yaml --rules ./rules.yaml --dist ./dist
+rm -rf ./dist/media
+cp -R ./media ./dist/media

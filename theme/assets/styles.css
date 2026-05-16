@@ -21,7 +21,7 @@ a { color: inherit; }
 .nav a { text-decoration: none; font-weight: 500; color: #50545d; }
 .phone { text-decoration: none; font-weight: 700; }
 
-.hero { position: relative; padding: 80px 0 72px; background: url('/media/site/hero-bg.jpg') center/cover no-repeat; color: #fff; overflow: hidden; }
+.hero { position: relative; padding: 80px 0 72px; background: url('../media/site/hero-bg.jpg') center/cover no-repeat; color: #fff; overflow: hidden; }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,17,20,.86) 0%, rgba(14,17,20,.58) 55%, rgba(14,17,20,.78) 100%); }
 .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; }
 .kicker { text-transform: uppercase; letter-spacing: .18em; font-size: 12px; margin: 0 0 10px; color: #e3dfd6; }

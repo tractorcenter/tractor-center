@@ -40,43 +40,24 @@
 <section class="service-gallery">
   <div class="wrap">
     <h2>Галерея работ</h2>
-    <div class="gallery-marquee">
-      <div class="gallery-track">
-        {{- if eq $slug "remont-traktorov" }}
-        <img src="{{ .BaseURL }}/media/site/tractors-1.jpg" alt="Ремонт тракторов" />
-        <img src="{{ .BaseURL }}/media/site/tractors-2.jpg" alt="Ремонт тракторов" />
-        <img src="{{ .BaseURL }}/media/site/tractors-3.jpg" alt="Ремонт тракторов" />
-        {{- else if eq $slug "remont-dvigateley" }}
-        <img src="{{ .BaseURL }}/media/site/engines-1.jpg" alt="Ремонт двигателей" />
-        <img src="{{ .BaseURL }}/media/site/engines-2.jpg" alt="Ремонт двигателей" />
-        <img src="{{ .BaseURL }}/media/site/engines-3.jpg" alt="Ремонт двигателей" />
-        {{- else if eq $slug "remont-tnvd-i-forsunok" }}
-        <img src="{{ .BaseURL }}/media/site/fuel-1.jpg" alt="Ремонт ТНВД и форсунок" />
-        <img src="{{ .BaseURL }}/media/site/fuel-2.jpg" alt="Ремонт ТНВД и форсунок" />
-        <img src="{{ .BaseURL }}/media/site/fuel-3.jpg" alt="Ремонт ТНВД и форсунок" />
-        {{- else }}
-        <img src="{{ .BaseURL }}/media/site/turbo-1.jpg" alt="Турбокомпрессоры" />
-        <img src="{{ .BaseURL }}/media/site/turbo-2.jpg" alt="Турбокомпрессоры" />
-        <img src="{{ .BaseURL }}/media/site/turbo-3.jpg" alt="Турбокомпрессоры" />
-        {{- end }}
-        {{- if eq $slug "remont-traktorov" }}
-        <img src="{{ .BaseURL }}/media/site/tractors-1.jpg" alt="Ремонт тракторов" />
-        <img src="{{ .BaseURL }}/media/site/tractors-2.jpg" alt="Ремонт тракторов" />
-        <img src="{{ .BaseURL }}/media/site/tractors-3.jpg" alt="Ремонт тракторов" />
-        {{- else if eq $slug "remont-dvigateley" }}
-        <img src="{{ .BaseURL }}/media/site/engines-1.jpg" alt="Ремонт двигателей" />
-        <img src="{{ .BaseURL }}/media/site/engines-2.jpg" alt="Ремонт двигателей" />
-        <img src="{{ .BaseURL }}/media/site/engines-3.jpg" alt="Ремонт двигателей" />
-        {{- else if eq $slug "remont-tnvd-i-forsunok" }}
-        <img src="{{ .BaseURL }}/media/site/fuel-1.jpg" alt="Ремонт ТНВД и форсунок" />
-        <img src="{{ .BaseURL }}/media/site/fuel-2.jpg" alt="Ремонт ТНВД и форсунок" />
-        <img src="{{ .BaseURL }}/media/site/fuel-3.jpg" alt="Ремонт ТНВД и форсунок" />
-        {{- else }}
-        <img src="{{ .BaseURL }}/media/site/turbo-1.jpg" alt="Турбокомпрессоры" />
-        <img src="{{ .BaseURL }}/media/site/turbo-2.jpg" alt="Турбокомпрессоры" />
-        <img src="{{ .BaseURL }}/media/site/turbo-3.jpg" alt="Турбокомпрессоры" />
-        {{- end }}
-      </div>
+    <div class="gallery-grid">
+      {{- if eq $slug "remont-traktorov" }}
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/tractors-1.jpg"><img src="{{ .BaseURL }}/media/site/tractors-1.jpg" alt="Ремонт тракторов" /></button>
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/tractors-2.jpg"><img src="{{ .BaseURL }}/media/site/tractors-2.jpg" alt="Ремонт тракторов" /></button>
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/tractors-3.jpg"><img src="{{ .BaseURL }}/media/site/tractors-3.jpg" alt="Ремонт тракторов" /></button>
+      {{- else if eq $slug "remont-dvigateley" }}
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/engines-1.jpg"><img src="{{ .BaseURL }}/media/site/engines-1.jpg" alt="Ремонт двигателей" /></button>
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/engines-2.jpg"><img src="{{ .BaseURL }}/media/site/engines-2.jpg" alt="Ремонт двигателей" /></button>
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/engines-3.jpg"><img src="{{ .BaseURL }}/media/site/engines-3.jpg" alt="Ремонт двигателей" /></button>
+      {{- else if eq $slug "remont-tnvd-i-forsunok" }}
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/fuel-1.jpg"><img src="{{ .BaseURL }}/media/site/fuel-1.jpg" alt="Ремонт ТНВД и форсунок" /></button>
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/fuel-2.jpg"><img src="{{ .BaseURL }}/media/site/fuel-2.jpg" alt="Ремонт ТНВД и форсунок" /></button>
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/fuel-3.jpg"><img src="{{ .BaseURL }}/media/site/fuel-3.jpg" alt="Ремонт ТНВД и форсунок" /></button>
+      {{- else }}
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/turbo-1.jpg"><img src="{{ .BaseURL }}/media/site/turbo-1.jpg" alt="Турбокомпрессоры" /></button>
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/turbo-2.jpg"><img src="{{ .BaseURL }}/media/site/turbo-2.jpg" alt="Турбокомпрессоры" /></button>
+      <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/turbo-3.jpg"><img src="{{ .BaseURL }}/media/site/turbo-3.jpg" alt="Турбокомпрессоры" /></button>
+      {{- end }}
     </div>
   </div>
 </section>

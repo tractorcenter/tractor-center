@@ -83,90 +83,61 @@
     });
   }
 
-  function wireGalleryAutoScroll() {
-    var marquees = document.querySelectorAll('.gallery-marquee');
-    if (!marquees.length) return;
-
-    marquees.forEach(function (marquee) {
-      var track = marquee.querySelector('.gallery-track');
-      if (!track) return;
-
-      var pauseUntil = 0;
-      var speedPxPerSec = 90;
-      var isDown = false;
-      var startX = 0;
-      var startScroll = 0;
-      var ticking = false;
-      var lastTs = 0;
-
-      function nowMs() {
-        return Date.now();
+  function fitServiceHeroTitles() {
+    var titles = document.querySelectorAll('.service-hero h1');
+    if (!titles.length) return;
+    titles.forEach(function (el) {
+      var max = 72;
+      var min = 22;
+      var size = max;
+      el.style.fontSize = size + 'px';
+      el.style.overflowWrap = 'normal';
+      el.style.wordBreak = 'normal';
+      while (el.scrollWidth > el.clientWidth && size > min) {
+        size -= 1;
+        el.style.fontSize = size + 'px';
       }
+    });
+  }
 
-      function pauseAuto(ms) {
-        pauseUntil = nowMs() + ms;
-      }
+  function wireGalleryLightbox() {
+    var items = document.querySelectorAll('.gallery-item');
+    if (!items.length) return;
 
-      function step(ts) {
-        if (!lastTs) lastTs = ts;
-        var dt = ts - lastTs;
-        lastTs = ts;
-        if (nowMs() >= pauseUntil && !isDown) {
-          marquee.scrollLeft += (speedPxPerSec * dt) / 1000;
-          var half = (track.scrollWidth - marquee.clientWidth) / 2;
-          if (half > 0 && marquee.scrollLeft >= half) {
-            marquee.scrollLeft = 0;
-          }
-        }
-        requestAnimationFrame(step);
-      }
+    var overlay = document.createElement('div');
+    overlay.className = 'gallery-lightbox';
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.innerHTML = '<img alt=\"\" />';
+    document.body.appendChild(overlay);
+    var image = overlay.querySelector('img');
 
-      marquee.addEventListener('wheel', function (e) {
-        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-          marquee.scrollLeft += e.deltaY;
-          e.preventDefault();
-        }
-        pauseAuto(1800);
-      }, { passive: false });
+    function close() {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      image.removeAttribute('src');
+      image.removeAttribute('alt');
+    }
 
-      marquee.addEventListener('scroll', function () {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(function () {
-          ticking = false;
-          pauseAuto(1200);
-        });
+    items.forEach(function (item) {
+      item.addEventListener('click', function () {
+        var src = item.getAttribute('data-gallery-src');
+        var img = item.querySelector('img');
+        if (!src) return;
+        image.src = src;
+        image.alt = img ? img.alt : '';
+        overlay.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
       });
+    });
 
-      marquee.addEventListener('pointerdown', function (e) {
-        isDown = true;
-        marquee.style.cursor = 'grabbing';
-        startX = e.clientX;
-        startScroll = marquee.scrollLeft;
-        pauseAuto(2000);
-      });
-
-      marquee.addEventListener('pointermove', function (e) {
-        if (!isDown) return;
-        var dx = e.clientX - startX;
-        marquee.scrollLeft = startScroll - dx;
-      });
-
-      function endDrag() {
-        if (!isDown) return;
-        isDown = false;
-        marquee.style.cursor = 'grab';
-        pauseAuto(1500);
-      }
-
-      marquee.addEventListener('pointerup', endDrag);
-      marquee.addEventListener('pointercancel', endDrag);
-      marquee.addEventListener('pointerleave', endDrag);
-
-      requestAnimationFrame(step);
+    overlay.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
     });
   }
 
   wireSearchInput();
-  wireGalleryAutoScroll();
+  fitServiceHeroTitles();
+  wireGalleryLightbox();
+  window.addEventListener('resize', fitServiceHeroTitles);
 })();

@@ -136,8 +136,54 @@
     });
   }
 
+  function wirePartnersCarousel() {
+    var carousels = document.querySelectorAll('[data-partners-carousel]');
+    if (!carousels.length) return;
+
+    carousels.forEach(function (carousel) {
+      var track = carousel.querySelector('.partners-track');
+      if (!track) return;
+      var items = Array.prototype.slice.call(track.children);
+      if (!items.length) return;
+
+      items.forEach(function (item) {
+        track.appendChild(item.cloneNode(true));
+      });
+
+      var speed = 36;
+      var pausedUntil = 0;
+      var last = 0;
+
+      function pause(ms) {
+        pausedUntil = Date.now() + ms;
+      }
+
+      carousel.addEventListener('mouseenter', function () { pause(100000); });
+      carousel.addEventListener('mouseleave', function () { pause(600); });
+      carousel.addEventListener('touchstart', function () { pause(1500); }, { passive: true });
+
+      function tick(ts) {
+        if (!last) last = ts;
+        var dt = ts - last;
+        last = ts;
+
+        if (Date.now() > pausedUntil) {
+          carousel.scrollLeft += (speed * dt) / 1000;
+          var half = track.scrollWidth / 2;
+          if (carousel.scrollLeft >= half) {
+            carousel.scrollLeft = 0;
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    });
+  }
+
   wireSearchInput();
   fitServiceHeroTitles();
   wireGalleryLightbox();
+  wirePartnersCarousel();
   window.addEventListener('resize', fitServiceHeroTitles);
 })();

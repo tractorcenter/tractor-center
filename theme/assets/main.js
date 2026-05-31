@@ -158,8 +158,6 @@
         pausedUntil = Date.now() + ms;
       }
 
-      carousel.addEventListener('mouseenter', function () { pause(100000); });
-      carousel.addEventListener('mouseleave', function () { pause(600); });
       carousel.addEventListener('touchstart', function () { pause(1500); }, { passive: true });
 
       function tick(ts) {

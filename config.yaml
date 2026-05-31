@@ -1,7 +1,7 @@
 site:
   id: tractor-center
   base_url: "https://cookiespooky.github.io/tractor-center/"
-  title: "Трактор Центр"
+  title: "ТракторЦентр"
   description: "Ремонт турбин, двигателей, ТНВД и форсунок"
   default_og_image: ""
   media_base_url: "https://cookiespooky.github.io/tractor-center/media/"

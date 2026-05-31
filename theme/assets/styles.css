@@ -56,11 +56,41 @@ h2 { margin: 0 0 1.5em; font-size: clamp(30px, 3.1vw, 44px); line-height: 1.1; }
 .benefit { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 16px 18px; font-weight: 600; }
 
 .partner-box { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
-.partner-row { display: grid; grid-template-columns: 1fr 360px; gap: 20px; align-items: center; }
+.partner-row { display: grid; grid-template-columns: 1fr minmax(0, 460px); gap: 20px; align-items: center; }
 .partner-copy { max-width: 70ch; }
 .partner-copy p { color: var(--muted); line-height: 1.65; }
-.partner-logo-link { display: block; justify-self: end; }
+.partner-logo-link { display: block; }
 .partner-logo { display: block; width: min(100%, 360px); height: auto; }
+.partners-carousel {
+  width: 100%;
+  overflow: hidden;
+}
+.partners-track {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  align-items: center;
+}
+.partner-logo-card {
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px;
+}
+.partner-logo-card .partner-logo {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  object-fit: contain;
+}
 
 .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
 .contacts-grid p { margin: 0 0 8px; }
@@ -93,7 +123,7 @@ h2 { margin: 0 0 1.5em; font-size: clamp(30px, 3.1vw, 44px); line-height: 1.1; }
   .service-actions { flex-direction: column; align-items: stretch; }
   .service-actions .btn { text-align: center; }
   .partner-copy h2 { display: none; }
-  .partner-logo-link { justify-self: start; order: -1; }
+  .partners-carousel { order: -1; }
   .contacts-copy .btn { margin-top: 14px; }
   .footer-inner { flex-direction: column; }
   .footer-left,

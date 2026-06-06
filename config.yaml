@@ -1,11 +1,11 @@
 site:
   id: tractor-center
-  base_url: "https://tractorcenter.github.io/tractor-center/"
+  base_url: "https://tractor-center.ru/"
   title: "ТракторЦентр"
   description: "Ремонт турбин, двигателей, ТНВД и форсунок"
   default_og_image: ""
-  media_base_url: "https://tractorcenter.github.io/tractor-center/media/"
-  host: tractorcenter.github.io
+  media_base_url: "https://tractor-center.ru/media/"
+  host: tractor-center.ru
 
 settings:
   hero_background: "/media/site/hero-bg.jpg"
@@ -14,8 +14,8 @@ settings:
 runtime:
   mode: "prod"
   dev:
-    base_url: "https://tractorcenter.github.io/tractor-center/"
-    media_base_url: "https://tractorcenter.github.io/tractor-center/media/"
+    base_url: "https://tractor-center.ru/"
+    media_base_url: "https://tractor-center.ru/media/"
 
 content:
   source: "local"

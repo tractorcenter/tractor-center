@@ -4,6 +4,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
+PROD_BASE_URL="https://tractor-center.ru"
+
 mkdir -p .bin
 BIN=".bin/notepub"
 
@@ -26,3 +28,13 @@ rm -rf ./.notepub
 "$BIN" build --config ./config.yaml --rules ./rules.yaml --dist ./dist
 rm -rf ./dist/media
 cp -R ./media ./dist/media
+cp ./CNAME ./dist/CNAME
+cp ./.notepub/artifacts/robots.txt ./dist/robots.txt
+cp ./.notepub/artifacts/sitemap.xml ./dist/sitemap.xml
+cp ./.notepub/artifacts/sitemap-index.xml ./dist/sitemap-index.xml
+cp ./.notepub/artifacts/sitemap-0001.xml ./dist/sitemap-0001.xml
+
+# Normalize any dev URLs the generator leaves in static HTML and metadata.
+if rg -l 'http://127\.0\.0\.1:8080' ./dist >/tmp/tractor-center-build-files.txt; then
+  xargs -I{} env LC_ALL=C perl -0pi -e "s|http://127\\.0\\.0\\.1:8080|$PROD_BASE_URL|g" "{}" </tmp/tractor-center-build-files.txt
+fi

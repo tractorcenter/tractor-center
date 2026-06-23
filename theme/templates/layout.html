@@ -31,10 +31,12 @@
     })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
     ym(Number(window.__yandexMetrikaId), "init", {
+      webvisor: true,
       clickmap: true,
-      trackLinks: true,
+      referrer: document.referrer,
+      url: location.href,
       accurateTrackBounce: true,
-      webvisor: true
+      trackLinks: true
     });
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/{{ index .Settings "yandex_metrika_id" }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>

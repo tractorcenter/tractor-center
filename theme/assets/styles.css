@@ -136,6 +136,11 @@ h2 { margin: 0 0 1em; font-size: clamp(30px, 3.1vw, 44px); line-height: 1.1; }
   color: var(--muted);
 }
 .checkbox input { margin-top: 3px; }
+.checkbox a {
+  color: var(--ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
 .form-status {
   min-height: 22px;
   margin: 0;

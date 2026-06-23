@@ -1,4 +1,21 @@
 (function () {
+  function getMetrikaCounterId() {
+    var id = String(window.__yandexMetrikaId || '').trim();
+    if (!id) return 0;
+    var parsed = Number(id);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  function reachGoal(goal, params) {
+    var counterId = getMetrikaCounterId();
+    if (!counterId || typeof window.ym !== 'function') return;
+    try {
+      window.ym(counterId, 'reachGoal', goal, params || {});
+    } catch (error) {
+      // Ignore analytics transport failures.
+    }
+  }
+
   var modal = document.querySelector('[data-search-modal]');
   var openBtn = document.querySelector('[data-search-open]');
   var closeBtns = document.querySelectorAll('[data-search-close]');
@@ -226,8 +243,8 @@
           pageUrl: window.location.href
         };
 
-        if (!payload.name || !payload.phone || !payload.service) {
-          setStatus(form, 'Заполните имя, телефон и направление.', 'is-error');
+        if (!payload.phone) {
+          setStatus(form, 'Укажите номер телефона.', 'is-error');
           return;
         }
 
@@ -253,9 +270,17 @@
           .then(function (body) {
             form.reset();
             if (body && body.partial) {
+              reachGoal('lead_form_submit', {
+                service: payload.service || 'not_selected',
+                status: 'partial'
+              });
               setStatus(form, 'Заявка принята. Один из каналов доставки сработал с предупреждением, мы проверим её вручную.', 'is-success');
               return;
             }
+            reachGoal('lead_form_submit', {
+              service: payload.service || 'not_selected',
+              status: 'success'
+            });
             setStatus(form, 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.', 'is-success');
           })
           .catch(function (error) {
@@ -268,10 +293,32 @@
     });
   }
 
+  function wireLeadFormGoals() {
+    var links = document.querySelectorAll('a[href="#lead-form"], a[href$="/#lead-form"], a[href*="#lead-form"]');
+    links.forEach(function (link) {
+      link.addEventListener('click', function () {
+        reachGoal('lead_form_open', {
+          source: link.textContent ? link.textContent.trim() : 'link'
+        });
+      });
+    });
+  }
+
+  function wirePrivacyGoals() {
+    var links = document.querySelectorAll('[data-privacy-link]');
+    links.forEach(function (link) {
+      link.addEventListener('click', function () {
+        reachGoal('privacy_policy_open');
+      });
+    });
+  }
+
   wireSearchInput();
   fitServiceHeroTitles();
   wireGalleryLightbox();
   wirePartnersCarousel();
   wireLeadForms();
+  wireLeadFormGoals();
+  wirePrivacyGoals();
   window.addEventListener('resize', fitServiceHeroTitles);
 })();

@@ -24,8 +24,8 @@
       {{- else }}
       <label class="field">
         <span>Направление</span>
-        <select name="service" required>
-          <option value="" selected disabled>Выберите направление</option>
+        <select name="service">
+          <option value="" selected>Выберите направление при необходимости</option>
           <option value="Ремонт тракторов">Ремонт тракторов</option>
           <option value="Ремонт двигателей">Ремонт двигателей</option>
           <option value="Ремонт ТНВД и форсунок">Ремонт ТНВД и форсунок</option>
@@ -37,7 +37,7 @@
       <div class="field-grid">
         <label class="field">
           <span>Как к вам обратиться</span>
-          <input type="text" name="name" autocomplete="name" placeholder="Имя или компания" required />
+          <input type="text" name="name" autocomplete="name" placeholder="Имя или компания" />
         </label>
         <label class="field">
           <span>Телефон</span>
@@ -54,7 +54,7 @@
       </label>
       <label class="checkbox">
         <input type="checkbox" name="consent" required />
-        <span>Согласен на обработку персональных данных для обратной связи по заявке.</span>
+        <span>Согласен с <a href="{{ .BaseURL }}/privacy/" target="_blank" rel="noopener" data-privacy-link>политикой обработки персональных данных</a> и даю согласие на обработку персональных данных для обратной связи по заявке.</span>
       </label>
       <button class="btn btn-accent" type="submit">Отправить заявку</button>
       <p class="form-status" data-form-status></p>

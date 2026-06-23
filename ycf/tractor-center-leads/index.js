@@ -67,14 +67,8 @@ function validateLead(payload) {
     pageUrl: clean(payload.pageUrl, 500)
   };
 
-  if (!lead.name) {
-    throw new Error("Укажите имя или компанию.");
-  }
   if (!lead.phone || lead.phone.replace(/\D/g, "").length < 10) {
     throw new Error("Укажите корректный номер телефона.");
-  }
-  if (!lead.service) {
-    throw new Error("Укажите направление обращения.");
   }
 
   return lead;
@@ -92,8 +86,8 @@ function escapeHtml(value) {
 function buildLeadMessage(lead) {
   return [
     "Новая заявка с сайта tractor-center.ru",
-    `Направление: ${lead.service}`,
-    `Имя: ${lead.name}`,
+    `Направление: ${lead.service || "-"}`,
+    `Имя: ${lead.name || "-"}`,
     `Телефон: ${lead.phone}`,
     `Страница: ${lead.pageTitle || "-"}`,
     `URL: ${lead.pageUrl || "-"}`,
@@ -293,18 +287,21 @@ async function sendEmail(lead) {
     host,
     port,
     secure,
+    connectionTimeout: 3500,
+    greetingTimeout: 3500,
+    socketTimeout: 3500,
     auth: {
       user,
       pass
     }
   });
 
-  const subject = `Новая заявка: ${lead.service}`;
+  const subject = `Новая заявка: ${lead.service || "без указанного направления"}`;
   const text = buildLeadMessage(lead);
   const html = [
     "<h2>Новая заявка с сайта tractor-center.ru</h2>",
-    `<p><strong>Направление:</strong> ${escapeHtml(lead.service)}</p>`,
-    `<p><strong>Имя:</strong> ${escapeHtml(lead.name)}</p>`,
+    `<p><strong>Направление:</strong> ${escapeHtml(lead.service || "-")}</p>`,
+    `<p><strong>Имя:</strong> ${escapeHtml(lead.name || "-")}</p>`,
     `<p><strong>Телефон:</strong> ${escapeHtml(lead.phone)}</p>`,
     `<p><strong>Страница:</strong> ${escapeHtml(lead.pageTitle || "-")}</p>`,
     `<p><strong>URL:</strong> ${escapeHtml(lead.pageUrl || "-")}</p>`,
@@ -322,9 +319,18 @@ async function sendEmail(lead) {
   return { skipped: false };
 }
 
-async function runChannel(name, handler) {
+async function runWithTimeout(handler, timeoutMs, label) {
+  return Promise.race([
+    handler(),
+    new Promise((_, reject) => {
+      setTimeout(() => reject(new Error(`${label}_timeout`)), timeoutMs);
+    })
+  ]);
+}
+
+async function runChannel(name, handler, timeoutMs = 4000) {
   try {
-    const result = await handler();
+    const result = await runWithTimeout(handler, timeoutMs, name);
     return {
       name,
       ok: true,
@@ -361,9 +367,15 @@ exports.handler = async function handler(event) {
     const payload = parseEventBody(event);
     const lead = validateLead(payload);
 
-    const emailResult = await runChannel("email", () => sendEmail(lead));
-    const telegramResult = await runChannel("telegram", () => sendTelegram(lead));
-    const storageResult = await runChannel("storage", () => persistLead(lead, { email: emailResult, telegram: telegramResult }));
+    const [emailResult, telegramResult] = await Promise.all([
+      runChannel("email", () => sendEmail(lead), 4000),
+      runChannel("telegram", () => sendTelegram(lead), 8000)
+    ]);
+    const storageResult = await runChannel(
+      "storage",
+      () => persistLead(lead, { email: emailResult, telegram: telegramResult }),
+      2500
+    );
     const configuredChannels = [emailResult, telegramResult].filter((item) => !item.skipped);
     const successfulChannels = configuredChannels.filter((item) => item.ok);
 
@@ -393,10 +405,7 @@ exports.handler = async function handler(event) {
     }, origin);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Не удалось обработать заявку.";
-    const clientError =
-      message === "Укажите имя или компанию." ||
-      message === "Укажите корректный номер телефона." ||
-      message === "Укажите направление обращения.";
+    const clientError = message === "Укажите корректный номер телефона.";
 
     if (!clientError) {
       console.error("lead submission failed", error);

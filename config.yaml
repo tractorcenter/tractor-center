@@ -16,6 +16,7 @@ settings:
   secondary_phone_href: "+79225173030"
   contact_email: "tractorcentr@yandex.ru"
   lead_form_endpoint: "https://functions.yandexcloud.net/d4es4fh152l526s8crb2"
+  yandex_metrika_id: ""
 
 runtime:
   mode: "prod"

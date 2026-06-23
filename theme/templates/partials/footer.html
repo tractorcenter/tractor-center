@@ -8,7 +8,7 @@
       <p><a href="tel:{{ index .Settings "primary_phone_href" }}">{{ index .Settings "primary_phone" }}</a></p>
       <p><a href="tel:{{ index .Settings "secondary_phone_href" }}">{{ index .Settings "secondary_phone" }}</a></p>
       <p><a href="mailto:{{ index .Settings "contact_email" }}">{{ index .Settings "contact_email" }}</a></p>
-      <button class="btn btn-outline footer-policy" type="button">Политика конфиденциальности</button>
+      <a class="btn btn-outline footer-policy" href="{{ .BaseURL }}/privacy/" data-privacy-link>Политика конфиденциальности</a>
     </div>
   </div>
 </footer>

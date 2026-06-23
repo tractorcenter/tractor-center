@@ -1,6 +1,9 @@
 <header class="topbar">
   <div class="wrap topbar-inner">
-    <a class="brand" href="{{ .BaseURL }}/">ТракторЦентр</a>
+    <a class="brand" href="{{ .BaseURL }}/" aria-label="ТракторЦентр">
+      <img class="brand-logo" src="{{ index .Settings "brand_logo" }}" alt="Логотип ТракторЦентр" />
+      <span class="brand-text">ТракторЦентр</span>
+    </a>
     <nav class="nav">
       <a href="{{ .BaseURL }}/#services">Услуги</a>
       <a href="{{ .BaseURL }}/#lead-form">Заявка</a>

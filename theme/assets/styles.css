@@ -16,7 +16,26 @@ a { color: inherit; }
 
 .topbar { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.92); border-bottom: 1px solid #ece6db; backdrop-filter: blur(8px); }
 .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
-.brand { text-decoration: none; font-size: 24px; font-weight: 800; }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 800;
+}
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #ddd6ca;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(32, 36, 42, 0.08);
+}
+.brand-text {
+  line-height: 1;
+}
 .nav { display: flex; gap: 18px; }
 .nav a { text-decoration: none; font-weight: 500; color: #50545d; }
 .phone { text-decoration: none; font-weight: 700; }

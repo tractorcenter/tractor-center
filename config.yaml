@@ -3,12 +3,13 @@ site:
   base_url: "https://tractor-center.ru/"
   title: "ТракторЦентр"
   description: "Ремонт турбин, двигателей, ТНВД и форсунок"
-  default_og_image: ""
+  default_og_image: "https://tractor-center.ru/media/site/brand/og-image.jpg"
   media_base_url: "https://tractor-center.ru/media/"
   host: tractor-center.ru
 
 settings:
   hero_background: "/media/site/hero-bg.jpg"
+  brand_logo: "/media/site/brand/header-logo.png"
   partner_logo: "/media/site/turbocom-invest-logo.png"
   primary_phone: "+7 (922) 680-44-33"
   primary_phone_href: "+79226804433"

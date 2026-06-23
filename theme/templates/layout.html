@@ -4,7 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#f5f3ef" />
   <link rel="stylesheet" href="{{ .AssetsBase }}/styles.css" />
+  <link rel="icon" type="image/x-icon" href="/media/site/brand/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/media/site/brand/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/media/site/brand/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/media/site/brand/apple-touch-icon.png" />
+  <link rel="manifest" href="/media/site/brand/site.webmanifest" />
   {{- if .Page.Description }}<meta name="description" content="{{ .Page.Description }}" />{{- end }}
   {{- if .Meta.Robots }}<meta name="robots" content="{{ .Meta.Robots }}" />{{- end }}
   {{- if .Canonical }}<link rel="canonical" href="{{ .Canonical }}" />{{- end }}

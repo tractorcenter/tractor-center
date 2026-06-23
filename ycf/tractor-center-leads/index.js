@@ -390,10 +390,7 @@ exports.handler = async function handler(event) {
       return jsonResponse(500, { error: "Не удалось отправить заявку. Попробуйте позже или свяжитесь с нами по телефону." }, origin);
     }
 
-    const partial =
-      emailResult.skipped || telegramResult.skipped ||
-      !emailResult.ok || !telegramResult.ok ||
-      !storageResult.ok;
+    const partial = telegramResult.skipped || !telegramResult.ok;
 
     return jsonResponse(200, {
       ok: true,

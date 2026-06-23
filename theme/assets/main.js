@@ -270,14 +270,14 @@
           .then(function (body) {
             form.reset();
             if (body && body.partial) {
-              reachGoal('lead_form_submit', {
+              reachGoal('form_submit', {
                 service: payload.service || 'not_selected',
                 status: 'partial'
               });
               setStatus(form, 'Заявка принята. Один из каналов доставки сработал с предупреждением, мы проверим её вручную.', 'is-success');
               return;
             }
-            reachGoal('lead_form_submit', {
+            reachGoal('form_submit', {
               service: payload.service || 'not_selected',
               status: 'success'
             });
@@ -297,18 +297,20 @@
     var links = document.querySelectorAll('a[href="#lead-form"], a[href$="/#lead-form"], a[href*="#lead-form"]');
     links.forEach(function (link) {
       link.addEventListener('click', function () {
-        reachGoal('lead_form_open', {
+        reachGoal('form_interest', {
           source: link.textContent ? link.textContent.trim() : 'link'
         });
       });
     });
   }
 
-  function wirePrivacyGoals() {
-    var links = document.querySelectorAll('[data-privacy-link]');
+  function wireEmailGoals() {
+    var links = document.querySelectorAll('a[href^="mailto:"]');
     links.forEach(function (link) {
       link.addEventListener('click', function () {
-        reachGoal('privacy_policy_open');
+        reachGoal('email_click', {
+          email: (link.getAttribute('href') || '').replace(/^mailto:/, '')
+        });
       });
     });
   }
@@ -319,6 +321,6 @@
   wirePartnersCarousel();
   wireLeadForms();
   wireLeadFormGoals();
-  wirePrivacyGoals();
+  wireEmailGoals();
   window.addEventListener('resize', fitServiceHeroTitles);
 })();

@@ -2,3 +2,5 @@
 .notepub/
 .bin/
 dist/
+ycf/*.zip
+ycf/*/node_modules/

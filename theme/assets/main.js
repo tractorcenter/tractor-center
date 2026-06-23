@@ -179,9 +179,99 @@
     });
   }
 
+  function wireLeadForms() {
+    var forms = document.querySelectorAll('[data-lead-form]');
+    if (!forms.length) return;
+
+    var endpoint = (window.__leadFormEndpoint || '').trim();
+
+    function setStatus(form, text, kind) {
+      var status = form.querySelector('[data-form-status]');
+      if (!status) return;
+      status.textContent = text || '';
+      status.classList.remove('is-success', 'is-error');
+      if (kind) status.classList.add(kind);
+    }
+
+    function setDisabled(form, disabled) {
+      var button = form.querySelector('button[type="submit"]');
+      if (button) {
+        button.disabled = disabled;
+        button.textContent = disabled ? 'Отправка...' : 'Отправить заявку';
+      }
+    }
+
+    forms.forEach(function (form) {
+      if (!endpoint) {
+        setStatus(form, 'Форма временно недоступна. Позвоните по указанным телефонам.', 'is-error');
+        return;
+      }
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var data = new FormData(form);
+        if ((data.get('website') || '').trim() !== '') {
+          form.reset();
+          setStatus(form, 'Заявка отправлена.', 'is-success');
+          return;
+        }
+
+        var payload = {
+          name: (data.get('name') || '').trim(),
+          phone: (data.get('phone') || '').trim(),
+          service: (data.get('service') || '').trim(),
+          message: (data.get('message') || '').trim(),
+          pageTitle: form.getAttribute('data-page-title') || document.title,
+          pageUrl: window.location.href
+        };
+
+        if (!payload.name || !payload.phone || !payload.service) {
+          setStatus(form, 'Заполните имя, телефон и направление.', 'is-error');
+          return;
+        }
+
+        setDisabled(form, true);
+        setStatus(form, 'Отправляем заявку...', '');
+
+        fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+          .then(function (response) {
+            return response.json().catch(function () { return {}; }).then(function (body) {
+              if (!response.ok) {
+                var error = new Error(body && body.error ? body.error : 'Не удалось отправить заявку.');
+                throw error;
+              }
+              return body;
+            });
+          })
+          .then(function (body) {
+            form.reset();
+            if (body && body.partial) {
+              setStatus(form, 'Заявка принята. Один из каналов доставки сработал с предупреждением, мы проверим её вручную.', 'is-success');
+              return;
+            }
+            setStatus(form, 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.', 'is-success');
+          })
+          .catch(function (error) {
+            setStatus(form, error && error.message ? error.message : 'Не удалось отправить заявку. Попробуйте позже или позвоните нам.', 'is-error');
+          })
+          .finally(function () {
+            setDisabled(form, false);
+          });
+      });
+    });
+  }
+
   wireSearchInput();
   fitServiceHeroTitles();
   wireGalleryLightbox();
   wirePartnersCarousel();
+  wireLeadForms();
   window.addEventListener('resize', fitServiceHeroTitles);
 })();

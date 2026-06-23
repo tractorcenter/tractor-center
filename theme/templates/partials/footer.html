@@ -2,11 +2,12 @@
   <div class="wrap footer-inner">
     <div class="footer-left">
       <strong>ТракторЦентр</strong>
-      <p>Ремонт турбин, двигателей, ТНВД и форсунок.</p>
+      <p>Ремонт тракторов, двигателей, ТНВД, форсунок и турбокомпрессоров.</p>
     </div>
     <div class="footer-right">
-      <p><a href="tel:+79226804433">+7 (922) 680-44-33</a></p>
-      <p><a href="mailto:tractorcentr@yandex.ru">tractorcentr@yandex.ru</a></p>
+      <p><a href="tel:{{ index .Settings "primary_phone_href" }}">{{ index .Settings "primary_phone" }}</a></p>
+      <p><a href="tel:{{ index .Settings "secondary_phone_href" }}">{{ index .Settings "secondary_phone" }}</a></p>
+      <p><a href="mailto:{{ index .Settings "contact_email" }}">{{ index .Settings "contact_email" }}</a></p>
       <button class="btn btn-outline footer-policy" type="button">Политика конфиденциальности</button>
     </div>
   </div>

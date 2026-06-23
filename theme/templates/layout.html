@@ -11,6 +11,7 @@
   {{- range .Meta.OpenGraph }}<meta property="{{ .Key }}" content="{{ .Value }}" />{{- end }}
   {{- if .Meta.JSONLD }}<script type="application/ld+json">{{ .Meta.JSONLD }}</script>{{- end }}
   <script>window.__notepubSearchMode = "{{ .SearchMode }}";</script>
+  <script>window.__leadFormEndpoint = "{{ index .Settings "lead_form_endpoint" }}";</script>
   <title>{{ .Title }}</title>
 </head>
 <body>

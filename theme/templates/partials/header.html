@@ -3,9 +3,13 @@
     <a class="brand" href="{{ .BaseURL }}/">ТракторЦентр</a>
     <nav class="nav">
       <a href="{{ .BaseURL }}/#services">Услуги</a>
+      <a href="{{ .BaseURL }}/#lead-form">Заявка</a>
       <a href="{{ .BaseURL }}/#partners">Партнеры</a>
       <a href="{{ .BaseURL }}/#contacts">Контакты</a>
     </nav>
-    <a class="phone" href="tel:+79226804433">+7 (922) 680-44-33</a>
+    <div class="topbar-phones">
+      <a class="phone" href="tel:{{ index .Settings "primary_phone_href" }}">{{ index .Settings "primary_phone" }}</a>
+      <a class="phone phone-secondary" href="tel:{{ index .Settings "secondary_phone_href" }}">{{ index .Settings "secondary_phone" }}</a>
+    </div>
   </div>
 </header>

@@ -1,0 +1,12 @@
+{
+  "name": "tractor-center-leads",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Yandex Cloud Function for TractorCenter lead delivery",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "aws4": "^1.13.2",
+    "nodemailer": "^6.10.1"
+  }
+}

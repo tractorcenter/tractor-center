@@ -10,6 +10,12 @@ site:
 settings:
   hero_background: "/media/site/hero-bg.jpg"
   partner_logo: "/media/site/turbocom-invest-logo.png"
+  primary_phone: "+7 (922) 680-44-33"
+  primary_phone_href: "+79226804433"
+  secondary_phone: "+7 (922) 517-30-30"
+  secondary_phone_href: "+79225173030"
+  contact_email: "tractorcentr@yandex.ru"
+  lead_form_endpoint: "https://functions.yandexcloud.net/d4es4fh152l526s8crb2"
 
 runtime:
   mode: "prod"

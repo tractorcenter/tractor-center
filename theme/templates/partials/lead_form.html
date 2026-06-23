@@ -1,0 +1,63 @@
+<section class="lead-section" id="lead-form">
+  <div class="wrap lead-grid">
+    <div class="lead-copy">
+      <p class="kicker">Заявка на сервис</p>
+      <h2>Оставьте заявку на ремонт</h2>
+      <p class="lead-section-text">
+        Перезвоним, уточним технику, узел, срочность и предложим оптимальный формат обслуживания по срокам и бюджету.
+      </p>
+      <ul class="lead-points">
+        <li>Турбины, ТНВД и форсунки: ориентировочный срок ремонта 2-5 рабочих дней.</li>
+        <li>Тракторы и двигатели: сроки рассчитываем после диагностики и состава работ.</li>
+        <li>Работаем с отечественной и импортной техникой.</li>
+      </ul>
+      <div class="lead-contact-list">
+        <a href="tel:{{ index .Settings "primary_phone_href" }}">{{ index .Settings "primary_phone" }}</a>
+        <a href="tel:{{ index .Settings "secondary_phone_href" }}">{{ index .Settings "secondary_phone" }}</a>
+        <a href="mailto:{{ index .Settings "contact_email" }}">{{ index .Settings "contact_email" }}</a>
+      </div>
+    </div>
+    <form class="lead-form-card" data-lead-form data-page-title="{{ .Page.Title }}">
+      {{- if eq .Page.Type "service" }}
+      <input type="hidden" name="service" value="{{ .Page.Title }}" />
+      <p class="lead-form-fixed-service">Направление: <strong>{{ .Page.Title }}</strong></p>
+      {{- else }}
+      <label class="field">
+        <span>Направление</span>
+        <select name="service" required>
+          <option value="" selected disabled>Выберите направление</option>
+          <option value="Ремонт тракторов">Ремонт тракторов</option>
+          <option value="Ремонт двигателей">Ремонт двигателей</option>
+          <option value="Ремонт ТНВД и форсунок">Ремонт ТНВД и форсунок</option>
+          <option value="Ремонт и продажа турбокомпрессоров">Ремонт и продажа турбокомпрессоров</option>
+          <option value="Техническое обслуживание">Техническое обслуживание</option>
+        </select>
+      </label>
+      {{- end }}
+      <div class="field-grid">
+        <label class="field">
+          <span>Как к вам обратиться</span>
+          <input type="text" name="name" autocomplete="name" placeholder="Имя или компания" required />
+        </label>
+        <label class="field">
+          <span>Телефон</span>
+          <input type="tel" name="phone" autocomplete="tel" placeholder="+7 (___) ___-__-__" required />
+        </label>
+      </div>
+      <label class="field">
+        <span>Комментарий</span>
+        <textarea name="message" rows="5" placeholder="Опишите технику, узел или проблему"></textarea>
+      </label>
+      <label class="field visually-hidden" aria-hidden="true" tabindex="-1">
+        <span>Сайт</span>
+        <input type="text" name="website" autocomplete="off" tabindex="-1" />
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" name="consent" required />
+        <span>Согласен на обработку персональных данных для обратной связи по заявке.</span>
+      </label>
+      <button class="btn btn-accent" type="submit">Отправить заявку</button>
+      <p class="form-status" data-form-status></p>
+    </form>
+  </div>
+</section>

@@ -42,6 +42,9 @@
       Для каждого заказа подбираем оптимальный формат обслуживания по срокам и бюджету.
     </p>
     {{- end }}
+    <div class="service-seo-copy">
+      {{ .Body }}
+    </div>
   </div>
 </section>
 
@@ -88,14 +91,6 @@
       <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/turbo-9.jpg"><img src="{{ .BaseURL }}/media/site/turbo-9.jpg" alt="Турбокомпрессоры" /></button>
       <button class="gallery-item" type="button" data-gallery-src="{{ .BaseURL }}/media/site/turbo-10.jpg"><img src="{{ .BaseURL }}/media/site/turbo-10.jpg" alt="Турбокомпрессоры" /></button>
       {{- end }}
-    </div>
-  </div>
-</section>
-
-<section class="service-details">
-  <div class="wrap service-details-card">
-    <div class="service-richtext">
-      {{ .Body }}
     </div>
   </div>
 </section>

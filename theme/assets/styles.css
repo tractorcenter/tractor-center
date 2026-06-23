@@ -290,6 +290,36 @@ h2 { margin: 0 0 1em; font-size: clamp(30px, 3.1vw, 44px); line-height: 1.1; }
   line-height: 1.7;
   font-size: 18px;
 }
+.service-seo-copy {
+  margin-top: 26px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 24px;
+  line-height: 1.75;
+}
+.service-seo-copy h2 {
+  margin: 1.2em 0 .55em;
+  font-size: clamp(24px, 2.2vw, 34px);
+}
+.service-seo-copy h2:first-child {
+  margin-top: 0;
+}
+.service-seo-copy p {
+  margin: 0 0 14px;
+  max-width: none;
+  color: var(--muted);
+  font-size: 18px;
+}
+.service-seo-copy ul {
+  margin: 0 0 14px;
+  padding-left: 20px;
+  display: grid;
+  gap: 10px;
+}
+.service-seo-copy li {
+  color: var(--ink);
+}
 .gallery-grid {
   column-count: 3;
   column-gap: 14px;

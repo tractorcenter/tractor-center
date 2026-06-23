@@ -291,15 +291,11 @@ h2 { margin: 0 0 1em; font-size: clamp(30px, 3.1vw, 44px); line-height: 1.1; }
   font-size: 18px;
 }
 .service-seo-copy {
-  margin-top: 26px;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 24px;
+  margin-top: 18px;
   line-height: 1.75;
 }
 .service-seo-copy h2 {
-  margin: 1.2em 0 .55em;
+  margin: 28px 0 12px;
   font-size: clamp(24px, 2.2vw, 34px);
 }
 .service-seo-copy h2:first-child {
@@ -307,7 +303,7 @@ h2 { margin: 0 0 1em; font-size: clamp(30px, 3.1vw, 44px); line-height: 1.1; }
 }
 .service-seo-copy p {
   margin: 0 0 14px;
-  max-width: none;
+  max-width: 78ch;
   color: var(--muted);
   font-size: 18px;
 }
@@ -316,9 +312,13 @@ h2 { margin: 0 0 1em; font-size: clamp(30px, 3.1vw, 44px); line-height: 1.1; }
   padding-left: 20px;
   display: grid;
   gap: 10px;
+  max-width: 78ch;
 }
 .service-seo-copy li {
   color: var(--ink);
+}
+.service-seo-copy img {
+  display: none;
 }
 .gallery-grid {
   column-count: 3;

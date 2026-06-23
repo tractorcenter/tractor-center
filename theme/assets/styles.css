@@ -61,7 +61,10 @@ h3 { line-height: 1.4; }
 .btn-outline { background: transparent; color: var(--ink); border-color: #bcb4a6; }
 
 .services, .benefits, .partners, .contacts { padding: 56px 0; }
-.lead-section { padding: 0 0 56px; }
+.lead-section {
+  padding: 0 0 56px;
+  scroll-margin-top: 96px;
+}
 .services-title { margin-bottom: 0; }
 .service-section { padding: 0 0 2.5em; }
 .service-divider { border: 0; border-top: 1px solid #d9d2c6; width: min(1140px, 92vw); margin: 0 auto 2.5em; }

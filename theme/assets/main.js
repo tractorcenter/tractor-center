@@ -315,6 +315,17 @@
     });
   }
 
+  function wireFactorySiteGoals() {
+    var links = document.querySelectorAll('[data-factory-site-link]');
+    links.forEach(function (link) {
+      link.addEventListener('click', function () {
+        reachGoal('factory_site_click', {
+          source: link.textContent ? link.textContent.trim() : 'factory_link'
+        });
+      });
+    });
+  }
+
   wireSearchInput();
   fitServiceHeroTitles();
   wireGalleryLightbox();
@@ -322,5 +333,6 @@
   wireLeadForms();
   wireLeadFormGoals();
   wireEmailGoals();
+  wireFactorySiteGoals();
   window.addEventListener('resize', fitServiceHeroTitles);
 })();

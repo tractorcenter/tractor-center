@@ -378,14 +378,15 @@ exports.handler = async function handler(event) {
     );
     const configuredChannels = [emailResult, telegramResult].filter((item) => !item.skipped);
     const successfulChannels = configuredChannels.filter((item) => item.ok);
+    const acceptedByStorage = storageResult.ok;
 
-    if (configuredChannels.length === 0) {
+    if (configuredChannels.length === 0 && !acceptedByStorage) {
       console.error("lead delivery is not configured");
       return jsonResponse(500, { error: "Каналы доставки заявок не настроены." }, origin);
     }
 
-    if (successfulChannels.length === 0) {
-      console.error("all lead channels failed", { emailResult, telegramResult });
+    if (successfulChannels.length === 0 && !acceptedByStorage) {
+      console.error("all lead channels failed", { emailResult, telegramResult, storageResult });
       return jsonResponse(500, { error: "Не удалось отправить заявку. Попробуйте позже или свяжитесь с нами по телефону." }, origin);
     }
 

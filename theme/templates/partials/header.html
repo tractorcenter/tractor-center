@@ -10,9 +10,9 @@
       <a href="{{ .BaseURL }}/#partners">Партнеры</a>
       <a href="{{ .BaseURL }}/#contacts">Контакты</a>
     </nav>
-    <div class="topbar-phones">
-      <a class="phone" href="tel:{{ index .Settings "primary_phone_href" }}">{{ index .Settings "primary_phone" }}</a>
-      <a class="phone phone-secondary" href="tel:{{ index .Settings "secondary_phone_href" }}">{{ index .Settings "secondary_phone" }}</a>
-    </div>
+    <a class="phone topbar-phone-desktop" href="tel:{{ index .Settings "primary_phone_href" }}">{{ index .Settings "primary_phone" }}</a>
+    <a class="topbar-phone-mobile" href="tel:{{ index .Settings "primary_phone_href" }}" aria-label="Позвонить в ТракторЦентр">
+      <span aria-hidden="true">☎</span>
+    </a>
   </div>
 </header>

@@ -1,4 +1,6 @@
 (function () {
+  var metrikaRetryTimers = {};
+
   function getMetrikaCounterId() {
     var id = String(window.__yandexMetrikaId || '').trim();
     if (!id) return 0;
@@ -6,14 +8,53 @@
     return Number.isFinite(parsed) ? parsed : 0;
   }
 
-  function reachGoal(goal, params) {
+  function sendGoal(goal, params) {
     var counterId = getMetrikaCounterId();
     if (!counterId || typeof window.ym !== 'function') return;
     try {
-      window.ym(counterId, 'reachGoal', goal, params || {});
+      if (params && Object.keys(params).length) {
+        window.ym(counterId, 'reachGoal', goal, params);
+        return;
+      }
+      window.ym(counterId, 'reachGoal', goal);
     } catch (error) {
       // Ignore analytics transport failures.
     }
+  }
+
+  function reachGoal(goal, params, attempt) {
+    var tryNumber = attempt || 0;
+    var counterId = getMetrikaCounterId();
+    if (!counterId) return;
+
+    if (typeof window.ym === 'function') {
+      sendGoal(goal, params);
+      return;
+    }
+
+    if (tryNumber >= 10) return;
+    var retryKey = goal + ':' + tryNumber;
+    clearTimeout(metrikaRetryTimers[retryKey]);
+    metrikaRetryTimers[retryKey] = window.setTimeout(function () {
+      reachGoal(goal, params, tryNumber + 1);
+    }, 400);
+  }
+
+  function bindGoalOnAction(element, goal, paramsBuilder) {
+    if (!element || element.dataset.goalBound === goal) return;
+    element.dataset.goalBound = goal;
+
+    var fired = false;
+    function fire() {
+      if (fired) return;
+      fired = true;
+      var params = typeof paramsBuilder === 'function' ? paramsBuilder(element) : {};
+      reachGoal(goal, params || {});
+    }
+
+    element.addEventListener('pointerdown', fire, { passive: true });
+    element.addEventListener('touchstart', fire, { passive: true });
+    element.addEventListener('click', fire);
   }
 
   var modal = document.querySelector('[data-search-modal]');
@@ -296,10 +337,10 @@
   function wireLeadFormGoals() {
     var links = document.querySelectorAll('a[href="#lead-form"], a[href$="/#lead-form"], a[href*="#lead-form"]');
     links.forEach(function (link) {
-      link.addEventListener('click', function () {
-        reachGoal('form_interest', {
+      bindGoalOnAction(link, 'form_interest', function () {
+        return {
           source: link.textContent ? link.textContent.trim() : 'link'
-        });
+        };
       });
     });
   }
@@ -307,10 +348,10 @@
   function wireEmailGoals() {
     var links = document.querySelectorAll('a[href^="mailto:"]');
     links.forEach(function (link) {
-      link.addEventListener('click', function () {
-        reachGoal('email_click', {
+      bindGoalOnAction(link, 'email_click', function () {
+        return {
           email: (link.getAttribute('href') || '').replace(/^mailto:/, '')
-        });
+        };
       });
     });
   }
@@ -318,10 +359,10 @@
   function wireFactorySiteGoals() {
     var links = document.querySelectorAll('[data-factory-site-link]');
     links.forEach(function (link) {
-      link.addEventListener('click', function () {
-        reachGoal('factory_site_click', {
+      bindGoalOnAction(link, 'factory_site_click', function () {
+        return {
           source: link.textContent ? link.textContent.trim() : 'factory_link'
-        });
+        };
       });
     });
   }

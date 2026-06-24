@@ -334,6 +334,50 @@
     });
   }
 
+  function wirePhoneMasks() {
+    var phones = document.querySelectorAll('input[name="phone"]');
+    if (!phones.length) return;
+
+    function formatPhone(value) {
+      var digits = String(value || '').replace(/\D/g, '');
+      if (!digits) return '';
+
+      if (digits[0] === '8') digits = '7' + digits.slice(1);
+      if (digits[0] !== '7') digits = '7' + digits;
+      digits = digits.slice(0, 11);
+
+      var rest = digits.slice(1);
+      var result = '+7';
+      if (rest.length > 0) result += ' (' + rest.slice(0, 3);
+      if (rest.length >= 3) result += ')';
+      if (rest.length > 3) result += ' ' + rest.slice(3, 6);
+      if (rest.length > 6) result += '-' + rest.slice(6, 8);
+      if (rest.length > 8) result += '-' + rest.slice(8, 10);
+      return result;
+    }
+
+    phones.forEach(function (input) {
+      function syncValue() {
+        input.value = formatPhone(input.value);
+      }
+
+      input.addEventListener('input', syncValue);
+      input.addEventListener('focus', function () {
+        if (!input.value.trim()) {
+          input.value = '+7 (';
+        }
+      });
+      input.addEventListener('blur', function () {
+        if (String(input.value || '').replace(/\D/g, '').length <= 1) {
+          input.value = '';
+          return;
+        }
+        syncValue();
+      });
+      syncValue();
+    });
+  }
+
   function wireLeadFormGoals() {
     var links = document.querySelectorAll('a[href="#lead-form"], a[href$="/#lead-form"], a[href*="#lead-form"]');
     links.forEach(function (link) {
@@ -371,6 +415,7 @@
   fitServiceHeroTitles();
   wireGalleryLightbox();
   wirePartnersCarousel();
+  wirePhoneMasks();
   wireLeadForms();
   wireLeadFormGoals();
   wireEmailGoals();
